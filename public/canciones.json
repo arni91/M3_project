@@ -11,27 +11,27 @@
     "album": "DESPECHÁ - Single",
     "imagenAlbum": "/images/despecha.jpg",
     "duracion": 158,
-    "valoracion": 5
+    "valoracion": 4.5
   },
   {
     "titulo": "TQG",
     "album": "Mañana Será Bonito",
     "imagenAlbum": "/images/msb.jpg",
     "duracion": 197,
-    "valoracion": 5
+    "valoracion": 4.8
   },
   {
     "titulo": "Tú Me Dejaste De Querer",
     "album": "El Madrileño",
     "imagenAlbum": "/images/el-madrileno.jpg",
     "duracion": 198,
-    "valoracion": 5
+    "valoracion": 3.9
   },
   {
     "titulo": "DELITO",
     "album": "Calambre",
     "imagenAlbum": "/images/calambre.jpg",
     "duracion": 189,
-    "valoracion": 4
+    "valoracion": 4.7
   }
 ]
