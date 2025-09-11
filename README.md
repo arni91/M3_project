@@ -1,47 +1,58 @@
-# 🎵 Proyecto React Form - Canciones
+# 🎵 Proyecto React – Canciones (Formulario + CRUD con API)
 
-Este proyecto es una práctica de **React** en la que se construye un formulario de contacto con validaciones y estilos aplicados mediante **CSS Modules**.
+## 📌 Enunciado del ejercicio
 
-## 📌 Objetivos del ejercicio
+1. Conéctate con la API pública [JSONPlaceholder](https://jsonplaceholder.typicode.com/posts).  
 
-- Crear un **formulario de contacto** en React.
-- Aplicar **validaciones nativas de HTML5** (campos requeridos, patrones, rangos, etc.).
-- Estilizar el formulario utilizando **CSS**.
-- Mantener una estructura de proyecto clara y modular.
+2. Implementa un **CRUD completo**:
+   - **Leer** datos al cargar el componente.  
+   - **Crear** datos nuevos con un botón “Crear”.  
+   - **Actualizar** datos con un botón “Actualizar”.  
+   - **Borrar** datos tras confirmación con un botón “Borrar”.  
 
-## 📂 Estructura
-
-
-
-```bash
-react_form/
-├─ public/
-│ └─ canciones.json # Datos de canciones de ejemplo
-├─ src/
-│ ├─ components/
-│ │ └─ ContactForm/
-│ │ ├─ ContactForm.jsx # Formulario de contacto
-│ │ └─ ContactForm.module.css # Estilos del formulario
-│ ├─ routes/
-│ │ └─ AppRouter.jsx # Rutas principales (incluye formulario)
-│ ├─ App.jsx
-│ ├─ main.jsx
-│ ├─ index.css
-│ └─ App.css
-└─ package.json
-```
 ---
 
-## 🖼️ Captura
+## 🚀 Tecnologías utilizadas
 
-![Preview de la App](public/images/screenshot.png)
+- [React](https://react.dev/) + [Vite](https://vitejs.dev/)
+- [React Router DOM](https://reactrouter.com/) para la navegación
+- **Hooks** de React (`useState`, `useEffect`, `useMemo`)
+- **CSS Modules** para estilos aislados
 
-## 🚀 Cómo ejecutar el proyecto
+---
 
-1. Clonar el repositorio:
+## 📂 Estructura del proyecto
+
+```bash
+src/
+├── components/
+│ └── ApiCancionCRUD/ 
+├── routes/
+│ └── AppRouter.jsx
+├── App.jsx
+├── main.jsx
+└── index.css
+```
+
+---
+
+## 📋 Funcionalidades principales
+
+### 🔹 CRUD con JSONPlaceholder
+- Conexión a `https://jsonplaceholder.typicode.com/posts`.
+- **Leer**: al cargar el componente.  
+- **Crear**: formulario con botón *Crear*.  
+- **Actualizar**: botón *Editar* → formulario editable → *Guardar cambios*.  
+- **Borrar**: confirmación con `confirm()` antes de eliminar.  
+- Los cambios se reflejan en la UI, aunque la API no guarda nada de forma persistente.
+
+---
+
+## 🖥️ Ejecución del proyecto
+
+1. Clonar este repositorio:
    ```bash
-   git clone https://github.com/arni91/react_form.git
-
+   git clone https://github.com/arni91/crud_base.git
 2. Instalar dependencias:
 
     ```bash
@@ -55,12 +66,9 @@ El proyecto se abrirá en http://localhost:5173/.
 
 ---
 
-## 🎯 Resultado esperado
+## ✅ Conclusión
 
-- Al entrar en /form, aparece un formulario con:
-    - Campos de nombre, apellidos, email, teléfono, usuario, etc.
-    - Selectores, checkboxes, radios, textarea y validaciones.
-    - Botones de Reset y Enviar.
-- El formulario está validado y estilizado con CSS.
+- Conexión a  API externa (JSONPlaceholder).
+- Un CRUD completo que cumple con los requisitos del enunciado
 
 ---

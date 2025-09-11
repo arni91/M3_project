@@ -1,0 +1,165 @@
+/* src/components/ApiCancionCRUD/ApiCancionCRUD.module.css */
+
+/* Contenedor general */
+.wrapper {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* Cabecera y estadísticas */
+.header {
+  display: grid;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.stats {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  color: #1f2937;
+  font-size: 0.95rem;
+}
+
+/* Formularios y controles */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.input,
+.select,
+.number {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  font-weight: 500;
+  color: #111827;
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.55rem;
+  padding: 0.55rem 0.7rem;
+  min-height: 2.6rem;
+  min-width: 10rem;
+}
+
+.input::placeholder {
+  color: #6b7280;
+}
+
+.input:focus,
+.select:focus,
+.number:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #111827;
+  font-size: 0.95rem;
+}
+
+/* Grid de tarjetas */
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+}
+
+.card {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  padding: 0.75rem;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.poster {
+  width: 100%;
+  display: block;
+  background: #f3f4f6;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+}
+
+.body {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #111827;
+}
+
+.meta {
+  margin: 0;
+  color: #475569;
+  font-size: 0.9rem;
+}
+
+.plot {
+  margin: 0.25rem 0 0;
+  color: #1f2937;
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+/* Estados */
+.status {
+  text-align: center;
+  padding: 2rem;
+  color: #374151;
+}
+
+.error {
+  text-align: center;
+  padding: 2rem;
+  color: #b91c1c;
+}
+
+/* Modo oscuro opcional */
+@media (prefers-color-scheme: dark) {
+  .input,
+  .select,
+  .number {
+    color: #e5e7eb;
+    background-color: #0f172a;
+    border-color: #334155;
+  }
+  .input::placeholder {
+    color: #94a3b8;
+  }
+  .title,
+  .row {
+    color: #e5e7eb;
+  }
+  .meta {
+    color: #cbd5e1;
+  }
+  .plot {
+    color: #e2e8f0;
+  }
+  .card {
+    border-color: #334155;
+    background: #111827;
+  }
+  .stats {
+    color: #e5e7eb;
+  }
+}

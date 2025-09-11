@@ -2,6 +2,8 @@ import { Routes, Route, Navigate, NavLink, Outlet } from "react-router-dom";
 import CancionesList from "../components/CancionesList/CancionesList.jsx";
 import CancionesAnalytics from "../components/CancionesAnalytics/CancionesAnalytics.jsx";
 import ContactForm from "../components/ContactForm/ContactForm.jsx";
+import ApiCancionCRUD from "../components/ApiCancionCRUD/ApiCancionCRUD.jsx";
+import ApiCancionList from "../components/ApiCancionList/ApiCancionList.jsx";
 
 function Layout() {
   const link = ({ isActive }) => ({
@@ -16,6 +18,8 @@ function Layout() {
           <NavLink to="/home" style={link}>Home</NavLink>
           <NavLink to="/analytics" style={link}>Analytics</NavLink>
           <NavLink to="/contacto" style={link}>Contacto</NavLink>
+          <NavLink to="/api-canciones" style={link}>API Canciones</NavLink>
+          <NavLink to="/api-canciones-crud" style={link}>CRUD Canciones</NavLink>
         </nav>
       </header>
       <main style={{ padding: 16 }}>
@@ -38,6 +42,8 @@ export default function AppRouter() {
         <Route path="/analytics" element={<CancionesAnalytics />} />
         <Route path="/contacto" element={<ContactForm />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/api-canciones" element={<ApiCancionList />} />
+        <Route path="/api-canciones-crud" element={<ApiCancionCRUD />} />
       </Route>
     </Routes>
   );
