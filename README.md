@@ -1,4 +1,4 @@
-# 🎵 Proyecto React – Canciones (Formulario + CRUD con API)
+# 🎵 Proyecto React – Canciones (CRUD con API)
 
 ## 📌 Enunciado del ejercicio
 
