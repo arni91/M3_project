@@ -1,21 +1,26 @@
 import { useEffect, useState } from "react";
-import { supabase } from "../../supabaseClient";
+import { supabase } from "../../../supabaseClient"; 
+import styles from "./HealthCheck.module.css";
 
 export default function HealthCheck() {
   const [status, setStatus] = useState("Comprobando...");
 
   useEffect(() => {
-    const check = async () => {
-      const { data, error } = await supabase.from("fichajes").select("id").limit(1);
-      if (error) setStatus("❌ Sin conexión");
-      else setStatus("✅ Conexión abierta");
+    const checkConnection = async () => {
+      try {
+        const { error } = await supabase.from("fichajes").select("count").limit(1);
+        if (error) throw error;
+        setStatus("✅ Conexión abierta con la DB");
+      } catch {
+        setStatus("❌ Sin conexión con la DB");
+      }
     };
-    check();
+    checkConnection();
   }, []);
 
   return (
-    <section>
-      <h2>Probar Conexión</h2>
+    <section className={styles.wrapper}>
+      <h2>Estado de la conexión</h2>
       <p>{status}</p>
     </section>
   );
