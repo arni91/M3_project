@@ -1,69 +1,51 @@
-# ⏱️ M3 Project – Control de Fichajes
+# Proyecto de Fichajes - InOut
 
-Aplicación CRUD para gestionar fichajes de trabajadores (check-in / check-out) con frontend en **React + Vite** y backend en **Supabase** (PostgreSQL gestionado).
+Aplicación de fichajes para un restaurante con roles de **cocinero** y **camarero**, desarrollada con **React** (frontend) y **Supabase** (backend).
 
----
-
-## 🚀 Funcionalidades
-
-- **Fichajes de trabajadores**: check-in y check-out múltiples por día.
-- **Roles**: trabajador y administrador.  
-  - Trabajador: solo puede ver sus fichajes y registrar entrada/salida.  
-  - Administrador: puede ver todos los fichajes.
-- **Vista de horas trabajadas**: cálculo de horas diarias por trabajador.
-- **Conexión Supabase**: consulta real a base de datos.
-- **Frontend en React**:  
-  - Listado de fichajes.  
-  - Formulario check-in / check-out.  
-  - Vista de horas trabajadas.  
-  - Botón "Probar conexión" (`/api/health`).
+## 🚀 Requisitos
+- Node.js >= 18
+- Cuenta y proyecto en [Supabase](https://supabase.com)
 
 ---
 
-## 🛠️ Tecnologías
+## ⚙️ Variables de entorno
+Crea un archivo `.env` en la raíz del proyecto con:
 
-- **Frontend**: React (Vite, React Router, Hooks).  
-- **Backend**: Supabase (PostgreSQL + REST API).  
-- **ORM**: consultas SQL directas a través de Supabase client.  
+VITE_SUPABASE_URL=https://<your-project>.supabase.co
+VITE_SUPABASE_ANON_KEY=<your-anon-key>
+
+
+Estas claves las obtienes en **Supabase > Project settings > API**.
 
 ---
 
-## 📂 Estructura del proyecto
+## ▶️ Arranque del proyecto
+Instalar dependencias y ejecutar el servidor de desarrollo:
 
 ```bash
-src/
-├── components/
-│ └── ApiCancionCRUD/ 
-├── routes/
-│ └── AppRouter.jsx
-├── App.jsx
-├── main.jsx
-└── index.css
+npm install
+npm run dev
 ```
 
----
+La aplicación se abrirá en:
+👉 http://localhost:5173
 
-## 🖥️ Ejecución del proyecto
+## 📂 Rutas del frontend
 
-1. Clonar este repositorio:
-   ```bash
-   git clone https://github.com/arni91/crud_base.git
-2. Instalar dependencias:
+- /fichajes → listado con búsqueda, enlaces a detalle y opción de borrar.
 
-    ```bash
-    npm install
-    ```
-3. Ejecutar en modo desarrollo:
-    ```bash
-    npm run dev
-    ```
-El proyecto se abrirá en http://localhost:5173/.
+- /fichajes/:id → detalle de un fichaje concreto.
+
+- /nuevo → formulario de checkin y checkout.
+
+- /salud → prueba de conexión con la base de datos.
 
 ---
 
+## 🗄️ Backend (Supabase)
+Tablas y lógica
 
-## 🗄️ Base de datos (Supabase)
-
+- Tabla fichajes
 ```bash
 create table fichajes (
   id bigint generated always as identity primary key,
@@ -74,7 +56,8 @@ create table fichajes (
   created_at timestamp not null default now()
 );
 ```
-```bash 
+- Vista horas_trabajadas
+```bash
 create or replace view horas_trabajadas as
 select 
   trabajador,
@@ -86,27 +69,69 @@ where checkout is not null
 group by trabajador, rol, date(checkin)
 order by trabajador, dia;
 ```
-
+- Función get_horas_trabajadas()
+```bash
+create or replace function get_horas_trabajadas()
+returns setof horas_trabajadas
+language sql
+security definer
+as $$
+  select * from horas_trabajadas;
+$$;
+```
 ---
 
-## 📜 Scripts disponibles
+## ✅ Pruebas básicas de backend
 
-En /frontend:
+El proyecto incluye un test de integración del CRUD con Node.js.
 
-- npm run dev → arranca en modo desarrollo.
-- npm run build → compila el proyecto para producción.
-- npm run preview → sirve el build generado.
+📂 Ubicación
 
-## ✅ Conclusión
+```bash 
+/tests/crud.test.js
+```
+▶️ Ejecución
 
-- 
-- 
+1. Instalar dependencia:
+
+```bash
+npm install node-fetch
+```
+2. Exportar las variables de entorno en la terminal:
+
+```bash
+export VITE_SUPABASE_URL="https://<your-project>.supabase.co"
+export VITE_SUPABASE_ANON_KEY="<your-anon-key>"
+```
+3. Ejecutar las pruebas:
+
+```bash 
+node tests/crud.test.js
+```
+📋 Qué valida
+
+- Crear fichaje
+
+- Leer fichaje
+
+- Actualizar checkout
+
+- Borrar fichaje
+
+Salida esperada:
+
+```bash
+🔎 Iniciando pruebas CRUD contra Supabase...
+✅ Insertado: { ... }
+✅ Leído: [ ... ]
+✅ Actualizado: [ ... ]
+✅ Borrado: OK
+🎉 Pruebas CRUD finalizadas
+```
+---
+## 📌 Control de versiones
+
+Repositorio público con commits pequeños y mensajes claros.
 
 ---
-
-## 👤 Autor
-
-Proyecto realizado por Arni dentro del módulo 3 de Fullstack.
-
----
-
+✍️ Autor: Arni

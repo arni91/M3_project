@@ -2,6 +2,7 @@ import { Routes, Route, NavLink, Outlet } from "react-router-dom";
 import FichajesList from "../components/FichajesList/FichajesList";
 import FichajeForm from "../components/FichajeForm/FichajeForm";
 import HealthCheck from "../components/HealthCheck/HealthCheck";
+import FichajeDetail from "../components/FichajeDetail/FichajeDetail";
 
 function Layout() {
   return (
@@ -28,6 +29,7 @@ export default function AppRouter() {
         <Route path="/fichajes" element={<FichajesList />} />
         <Route path="/nuevo" element={<FichajeForm />} />
         <Route path="/salud" element={<HealthCheck />} />
+        <Route path="/fichajes/:id" element={<FichajeDetail />} />
       </Route>
     </Routes>
   );

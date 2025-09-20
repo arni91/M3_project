@@ -47,7 +47,8 @@ export default function FichajeForm() {
 
   return (
     <section className={styles.wrapper}>
-      <h2>Formulario de Fichaje</h2>
+      <h2 className={styles.title}>Formulario de Fichaje</h2>
+
       <div className={styles.form}>
         <input
           type="text"
