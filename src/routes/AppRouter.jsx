@@ -9,9 +9,9 @@ function Layout() {
     <>
       <header style={{ padding: "12px", borderBottom: "1px solid #eee" }}>
         <nav style={{ display: "flex", gap: 12 }}>
-          <NavLink to="/fichajes">Fichajes</NavLink>
-          <NavLink to="/nuevo">Nuevo Fichaje</NavLink>
           <NavLink to="/salud">Conexión</NavLink>
+          <NavLink to="/nuevo">Fichar</NavLink>
+          <NavLink to="/fichajes">Listado de fichajes</NavLink>
         </nav>
       </header>
       <main style={{ padding: "16px" }}>

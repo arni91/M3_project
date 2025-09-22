@@ -123,7 +123,7 @@ Salida esperada:
 ```bash
 🔎 Iniciando pruebas CRUD contra Supabase...
 ✅ Insertado: { ... }
-✅ Leído: [ ... ]
+✅ Leido: [ ... ]
 ✅ Actualizado: [ ... ]
 ✅ Borrado: OK
 🎉 Pruebas CRUD finalizadas
@@ -131,7 +131,7 @@ Salida esperada:
 ---
 ## 📌 Control de versiones
 
-Repositorio público con commits pequeños y mensajes claros.
+Repositorio público con commits pequeños con revisiones .revXX y mensajes claros.
 
 ---
 ✍️ Autor: Arni

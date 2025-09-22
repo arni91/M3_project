@@ -10,7 +10,8 @@ export default function FichajesList() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    const loadFichajes = async () => {
+    //  debounce con timer
+    const timer = setTimeout(async () => {
       setLoading(true);
       setError(null);
       try {
@@ -31,9 +32,9 @@ export default function FichajesList() {
       } finally {
         setLoading(false);
       }
-    };
+    }, 400); // espera 400ms después de dejar de teclear
 
-    loadFichajes();
+    return () => clearTimeout(timer); // limpiar timer al cambiar search
   }, [search]);
 
   const handleDelete = async (id) => {

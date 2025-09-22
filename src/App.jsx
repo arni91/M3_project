@@ -16,7 +16,7 @@ function Layout() {
       <header style={{ padding: "12px 16px", borderBottom: "1px solid #eee" }}>
         <nav style={{ display: "flex", gap: "1rem" }}>
           <NavLink to="/health" style={linkStyle}>
-            Health
+            Conexión
           </NavLink>
           <NavLink to="/form" style={linkStyle}>
             Fichar
