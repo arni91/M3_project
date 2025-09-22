@@ -22,7 +22,8 @@ export default function HealthCheck() {
       <button onClick={checkConnection} className={styles.button}>
         Probar conexión
       </button>
-      <p>{status}</p>
+      {/* aria-live para accesibilidad */}
+      <p aria-live="polite">{status}</p>
     </section>
   );
 }
