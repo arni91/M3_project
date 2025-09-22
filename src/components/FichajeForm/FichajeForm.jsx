@@ -12,9 +12,11 @@ export default function FichajeForm() {
     setLoading(true);
     setMessage("");
     try {
-      const { error } = await supabase.from("fichajes").insert([{ trabajador, rol }]);
+      const { error } = await supabase
+        .from("fichajes")
+        .insert([{ trabajador, rol }]);
       if (error) throw error;
-      setMessage("Checkin registrado ✅");
+      setMessage("✅ Checkin registrado");
     } catch (err) {
       setMessage("❌ Error: " + err.message);
     } finally {
@@ -30,13 +32,14 @@ export default function FichajeForm() {
         .from("fichajes")
         .update({ checkout: new Date().toISOString() })
         .eq("trabajador", trabajador)
-        .is("checkout", null); // solo fichaje abierto
+        .is("checkout", null) // solo fichaje abierto
+        .select(); // para que devuelva registros
 
       if (error) throw error;
       if (!data || data.length === 0) {
         setMessage("⚠️ No hay checkin abierto para este trabajador");
       } else {
-        setMessage("Checkout registrado ✅");
+        setMessage("✅ Checkout registrado");
       }
     } catch (err) {
       setMessage("❌ Error: " + err.message);
@@ -47,20 +50,26 @@ export default function FichajeForm() {
 
   return (
     <section className={styles.wrapper}>
-      <h2 className={styles.title}>Formulario de Fichaje</h2>
-
+      <h2>Formulario de Fichaje</h2>
       <div className={styles.form}>
-        <input
-          type="text"
-          placeholder="Nombre trabajador"
-          value={trabajador}
-          onChange={(e) => setTrabajador(e.target.value)}
-          required
-        />
-        <select value={rol} onChange={(e) => setRol(e.target.value)}>
-          <option value="cocinero">Cocinero</option>
-          <option value="camarero">Camarero</option>
-        </select>
+        <label>
+          Nombre trabajador:
+          <input
+            type="text"
+            placeholder="Nombre trabajador"
+            value={trabajador}
+            onChange={(e) => setTrabajador(e.target.value)}
+            required
+          />
+        </label>
+
+        <label>
+          Rol:
+          <select value={rol} onChange={(e) => setRol(e.target.value)}>
+            <option value="cocinero">Cocinero</option>
+            <option value="camarero">Camarero</option>
+          </select>
+        </label>
 
         <div className={styles.buttons}>
           <button onClick={handleCheckin} disabled={loading || !trabajador}>
@@ -71,7 +80,7 @@ export default function FichajeForm() {
           </button>
         </div>
       </div>
-      {message && <p className={styles.message}>{message}</p>}
+      {message && <p className={styles.message} aria-live="polite">{message}</p>}
     </section>
   );
 }
