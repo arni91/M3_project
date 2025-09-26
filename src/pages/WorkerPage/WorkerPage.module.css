@@ -1,0 +1,25 @@
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+.title {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+.container {
+  padding: 20px;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.hours {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}

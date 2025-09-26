@@ -1,0 +1,25 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  border: 1px solid var(--color-border-light);
+  padding: 8px;
+  text-align: left;
+}
+
+.table th {
+  background: var(--color-border-light);
+}
+
+.in {
+  color: var(--color-success);
+  font-weight: bold;
+}
+
+.out {
+  color: var(--color-danger);
+  font-weight: bold;
+}

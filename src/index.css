@@ -1,10 +1,110 @@
-:root { 
-    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif; 
-    color-scheme: light dark; }
-body { 
-    margin: 0; 
-    display: flex; 
-    justify-content: center; 
-    align-items: flex-start; 
-    min-height: 100vh; 
-    background: #4887c5; }
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Variables */
+:root {
+  --color-bg: #f3f4f6;
+  --color-text: #111827;
+  --color-muted: #6b7280;
+
+  --color-primary: #2563eb;
+  --color-primary-hover: #1e40af;
+
+  --color-success: #16a34a;
+  --color-success-hover: #15803d;
+
+  --color-danger: #dc2626;
+  --color-danger-hover: #b91c1c;
+
+  --color-border: #d1d5db;
+  --color-border-light: #e5e7eb;
+}
+
+/* Base */
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  background: linear-gradient(135deg, #f9fafb, #e5e7eb);
+  color: var(--color-text);
+  line-height: 1.5;
+}
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+/* Botones */
+.btn {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+.btn:focus {
+  outline: 2px solid var(--color-primary-hover);
+  outline-offset: 2px;
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.btn-primary {
+  background: var(--color-primary);
+  color: white;
+}
+.btn-primary:hover {
+  background: var(--color-primary-hover);
+}
+.btn-success {
+  background: var(--color-success);
+  color: white;
+}
+.btn-success:hover {
+  background: var(--color-success-hover);
+}
+.btn-danger {
+  background: var(--color-danger);
+  color: white;
+}
+.btn-danger:hover {
+  background: var(--color-danger-hover);
+}
+
+/* Cards */
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  margin: 16px 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.card-header {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--color-primary);
+}
+.card-body {
+  font-size: 1rem;
+  color: var(--color-text);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .card {
+    padding: 16px;
+  }
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}

@@ -1,137 +1,158 @@
-# Proyecto de Fichajes - InOut
+# InOut — App de fichajes para restaurantes
 
-Aplicación de fichajes para un restaurante con roles de **cocinero** y **camarero**, desarrollada con **React** (frontend) y **Supabase** (backend).
-
-## 🚀 Requisitos
-- Node.js >= 18
-- Cuenta y proyecto en [Supabase](https://supabase.com)
+Aplicación Fullstack desarrollada con **React** (frontend) y **Supabase** (backend como servicio).  
+Permite a los trabajadores fichar entradas y salidas en distintos restaurantes, y a los administradores gestionar los fichajes y trabajadores desde un panel de control.
 
 ---
 
-## ⚙️ Variables de entorno
-Crea un archivo `.env` en la raíz del proyecto con:
+## 🚀 Tecnologías utilizadas
 
-VITE_SUPABASE_URL=https://<your-project>.supabase.co
-VITE_SUPABASE_ANON_KEY=<your-anon-key>
-
-
-Estas claves las obtienes en **Supabase > Project settings > API**.
-
----
-
-## ▶️ Arranque del proyecto
-Instalar dependencias y ejecutar el servidor de desarrollo:
-
-```bash
-npm install
-npm run dev
-```
-
-La aplicación se abrirá en:
-👉 http://localhost:5173
-
-## 📂 Rutas del frontend
-
-- /fichajes → listado con búsqueda, enlaces a detalle y opción de borrar.
-
-- /fichajes/:id → detalle de un fichaje concreto.
-
-- /nuevo → formulario de checkin y checkout.
-
-- /salud → prueba de conexión con la base de datos.
+- **Frontend:** React + Vite + React Router
+- **Backend:** Supabase (PostgreSQL + Auth + RLS)
+- **Auth:** Supabase Auth (email/password)
+- **Estilos:** CSS Modules
+- **Testing:** Jest (integración CRUD sobre Supabase)
+- **Control de versiones:** Git + GitHub
 
 ---
 
-## 🗄️ Backend (Supabase)
-Tablas y lógica
+## 📦 Requisitos previos
 
-- Tabla fichajes
-```bash
-create table fichajes (
-  id bigint generated always as identity primary key,
-  trabajador text not null,
-  rol text check (rol in ('cocinero','camarero')) not null,
-  checkin timestamp not null default now(),
-  checkout timestamp,
-  created_at timestamp not null default now()
-);
-```
-- Vista horas_trabajadas
-```bash
-create or replace view horas_trabajadas as
-select 
-  trabajador,
-  rol,
-  date(checkin) as dia,
-  sum(extract(epoch from (checkout - checkin)) / 3600) as horas_trabajadas
-from fichajes
-where checkout is not null
-group by trabajador, rol, date(checkin)
-order by trabajador, dia;
-```
-- Función get_horas_trabajadas()
-```bash
-create or replace function get_horas_trabajadas()
-returns setof horas_trabajadas
-language sql
-security definer
-as $$
-  select * from horas_trabajadas;
-$$;
-```
+- [Node.js](https://nodejs.org/) v18 o superior  
+- Una cuenta en [Supabase](https://supabase.com)  
+- Variables de entorno configuradas en un archivo `.env`
+
 ---
 
-## ✅ Pruebas básicas de backend
+## ⚙️ Instalación y arranque local
 
-El proyecto incluye un test de integración del CRUD con Node.js.
+1. **Clonar repositorio**
 
-📂 Ubicación
+   ```bash
+   git clone https://github.com/arni91/M3_project.git
+   cd inout
+   ```
+2. Instalar dependencias
+ 
+    ```bash
+    npm install
+    ```
+3. Configurar variables de entorno
 
-```bash 
-/tests/crud.test.js
-```
-▶️ Ejecución
+    Crea un archivo .env en la raíz con el contenido:
 
-1. Instalar dependencia:
+    ```bash 
+    VITE_SUPABASE_URL=https://<tu-proyecto>.supabase.co
+    VITE_SUPABASE_ANON_KEY=<tu-anon-key>
+    ```
+4. Arrancar frontend
 
-```bash
-npm install node-fetch
-```
-2. Exportar las variables de entorno en la terminal:
+    ```bash
+    npm install
+    npm run dev
+    ```
+    Por defecto se abre en http://localhost:5173
 
-```bash
-export VITE_SUPABASE_URL="https://<your-project>.supabase.co"
-export VITE_SUPABASE_ANON_KEY="<your-anon-key>"
-```
-3. Ejecutar las pruebas:
+## 🗄️ Base de datos (Supabase)
 
-```bash 
-node tests/crud.test.js
-```
-📋 Qué valida
+Tablas principales
+
+- profiles → perfiles de usuario vinculados a auth.users
+
+  -  id (uuid, pk)
+  - email (text)
+  - role (text: worker/admin)
+  - full_name (text)
+  - created_at (timestamp)
+
+- restaurants → restaurantes disponibles
+  
+  - id (bigint, pk)
+  - name (text)
+
+- checkins → fichajes de entrada/salida
+
+  - id (bigint, pk)
+  - user_id (uuid)
+  - restaurant_id (bigint)
+  - type (text: in/out)
+  - timestamp (timestamp)
+
+![Schema Supabase](./public/schema.png)
+
+Seguridad (RLS)
+
+- Activado en todas las tablas.
+- Workers → solo pueden ver/editar su propio perfil y fichajes.
+- Admins → acceso completo a perfiles, fichajes y gestión de restaurantes.
+- Restaurantes → lectura pública (para poder probar conexión sin login).
+
+
+
+## 🌐 Funcionalidades
+
+Frontend
+
+- Login / Registro con Supabase Auth.
+- Worker Page (/worker):
+  - Fichar entrada/salida en un restaurante.
+  - Ver tabla de fichajes propios.
+  - Cálculo de horas acumuladas.
+
+- Admin Page (/admin):
+  - Listado de trabajadores con buscador por nombre/email.
+  - Ver fichajes de cada trabajador.
+  - Ver detalle de un fichaje.
+  - Editar o eliminar fichajes.
+
+- Botón "Probar conexión" en la barra de navegación:
+  - Realiza un ping contra Supabase.
+  - Muestra estado ✅ Conexión OK o ❌ Conexión FAIL.
+
+Backend (Supabase)
+
+- Persistencia real en PostgreSQL gestionado por Supabase.
+- Policies de seguridad (RLS).
+- Trigger automático para crear profile al registrar un usuario.
+
+## 🔎 Rutas principales (frontend)
+
+- / → Login / Registro
+- /worker → Panel de trabajador
+- /admin → Panel de administrador
+
+## 🧪 Pruebas
+
+Test de integración (Jest)
+
+Se incluye un test en tests/checkins.test.js que valida el CRUD completo de checkins:
 
 - Crear fichaje
-
 - Leer fichaje
-
-- Actualizar checkout
-
+- Actualizar fichaje
 - Borrar fichaje
 
-Salida esperada:
-
-```bash
-🔎 Iniciando pruebas CRUD contra Supabase...
-✅ Insertado: { ... }
-✅ Leido: [ ... ]
-✅ Actualizado: [ ... ]
-✅ Borrado: OK
-🎉 Pruebas CRUD finalizadas
+```bash 
+npm test
 ```
----
-## 📌 Control de versiones
+## 📚 Cómo usar la aplicación
 
-Repositorio público con commits pequeños con revisiones .revXX y mensajes claros.
+1. Registrar un usuario worker desde la pantalla de inicio.
+2. Promover un usuario a admin (ejemplo admin@inout.com):
 
----
-✍️ Autor: Arni
+    ```bash
+    update profiles
+    set role = 'admin'
+    where email = 'admin@inout.com';
+    ```
+3. Acceder con worker → fichar entradas/salidas.
+4. Acceder con admin → gestionar trabajadores y fichajes.
+5. Probar conexión → usar el botón en la barra superior.
+
+## 👨‍💻 Autor
+
+arni
+
+
+
+

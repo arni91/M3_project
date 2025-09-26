@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+}
+
+.toggle {
+  margin-top: 12px;
+  text-align: center;
+  color: var(--color-primary);
+  cursor: pointer;
+}
+.toggle:hover {
+  text-decoration: underline;
+}
