@@ -42,8 +42,8 @@ Permite a los trabajadores fichar entradas y salidas en distintos restaurantes, 
     Crea un archivo .env en la raíz con el contenido:
 
     ```bash 
-    VITE_SUPABASE_URL=https://<tu-proyecto>.supabase.co
-    VITE_SUPABASE_ANON_KEY=<tu-anon-key>
+    VITE_SUPABASE_URL=https://wfzabsptzbbgzlbtygng.supabase.co
+    VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndmemFic3B0emJiZ3psYnR5Z25nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg3MTU0NzEsImV4cCI6MjA3NDI5MTQ3MX0.TabeMpRLcsYduN7C29ZKSwMWWKT2Ilm5e1WMnPxRmKU
     ```
 4. Arrancar frontend
 
