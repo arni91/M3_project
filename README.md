@@ -30,7 +30,7 @@ Permite a los trabajadores fichar entradas y salidas en distintos restaurantes, 
 
    ```bash
    git clone https://github.com/arni91/M3_project.git
-   cd inout
+   cd M3_project
    ```
 2. Instalar dependencias
  
@@ -48,7 +48,6 @@ Permite a los trabajadores fichar entradas y salidas en distintos restaurantes, 
 4. Arrancar frontend
 
     ```bash
-    npm install
     npm run dev
     ```
     Por defecto se abre en http://localhost:5173
@@ -138,13 +137,14 @@ npm test
 ## 📚 Cómo usar la aplicación
 
 1. Registrar un usuario worker desde la pantalla de inicio.
-2. Promover un usuario a admin (ejemplo admin@inout.com):
+2. Entrar como admin ya registrado (ejemplo admin@inout.com):
 
     ```bash
     update profiles
     set role = 'admin'
     where email = 'admin@inout.com';
     ```
+    La contraseña es Ironhack.
 3. Acceder con worker → fichar entradas/salidas.
 4. Acceder con admin → gestionar trabajadores y fichajes.
 5. Probar conexión → usar el botón en la barra superior.
